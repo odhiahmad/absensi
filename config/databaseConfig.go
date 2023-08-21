@@ -5,7 +5,7 @@ import (
 	"os"
 
 	"github.com/joho/godotenv"
-	"github.com/odhiahmad/apiuser/entity"
+	"github.com/odhiahmad/absensi/entity"
 	"gorm.io/driver/postgres"
 	"gorm.io/gorm"
 )

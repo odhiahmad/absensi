@@ -3,7 +3,7 @@ package repository
 import (
 	"log"
 
-	"github.com/odhiahmad/apiuser/entity"
+	"github.com/odhiahmad/absensi/entity"
 	"golang.org/x/crypto/bcrypt"
 	"gorm.io/gorm"
 )

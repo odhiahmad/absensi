@@ -4,9 +4,9 @@ import (
 	"net/http"
 
 	"github.com/gin-gonic/gin"
-	"github.com/odhiahmad/apiuser/dto"
-	"github.com/odhiahmad/apiuser/helper"
-	"github.com/odhiahmad/apiuser/service"
+	"github.com/odhiahmad/absensi/dto"
+	"github.com/odhiahmad/absensi/helper"
+	"github.com/odhiahmad/absensi/service"
 )
 
 type AbsenController interface {
@@ -14,52 +14,46 @@ type AbsenController interface {
 	UpdateAbsen(ctx *gin.Context)
 }
 
-type userController struct {
-	userService service.AbsenService
+type absenController struct {
+	absenService service.AbsenService
 	jwtService  service.JWTService
 }
 
-func NewAbsenController(userService service.AbsenService, jwtService service.JWTService) AbsenController {
-	return &userController{
-		userService: userService,
+func NewAbsenController(absenService service.AbsenService, jwtService service.JWTService) AbsenController {
+	return &absenController{
+		absenService: absenService,
 		jwtService:  jwtService,
 	}
 }
 
-func (c *userController) CreateAbsen(ctx *gin.Context) {
-	var userCreateDTO dto.AbsenCreateDTO
-	errDTO := ctx.ShouldBind(&userCreateDTO)
+func (c *absenController) CreateAbsen(ctx *gin.Context) {
+	var absenCreateDTO dto.AbsenCreateDTO
+	errDTO := ctx.ShouldBind(&absenCreateDTO)
 	if errDTO != nil {
 		response := helper.BuildErrorResponse("Failed to process request", errDTO.Error(), helper.EmptyObj{})
 		ctx.AbortWithStatusJSON(http.StatusBadRequest, response)
 		return
 	}
 
-	if !c.userService.IsDuplicateAbsenname(userCreateDTO.Absenname) {
-		response := helper.BuildErrorResponse("Failed to process request", "Duplicate username", helper.EmptyObj{})
-		ctx.JSON(http.StatusConflict, response)
-	} else {
-		createdAbsen := c.userService.CreateAbsen(userCreateDTO)
+	
+		createdAbsen := c.absenService.CreateAbsen(absenCreateDTO)
 		response := helper.BuildResponse(true, "!OK", createdAbsen)
 		ctx.JSON(http.StatusCreated, response)
-	}
+	
 }
 
-func (c *userController) UpdateAbsen(ctx *gin.Context) {
-	var userUpdateDTO dto.AbsenUpdateDTO
-	errDTO := ctx.ShouldBind(&userUpdateDTO)
+func (c *absenController) UpdateAbsen(ctx *gin.Context) {
+	var absenUpdateDTO dto.AbsenUpdateDTO
+	errDTO := ctx.ShouldBind(&absenUpdateDTO)
 	if errDTO != nil {
 		response := helper.BuildErrorResponse("Failed to process request", errDTO.Error(), helper.EmptyObj{})
 		ctx.AbortWithStatusJSON(http.StatusBadRequest, response)
 		return
 	}
 
-	if !c.userService.IsDuplicateAbsenname(userUpdateDTO.Absenname) {
-		response := helper.BuildErrorResponse("Failed to process request", "Duplicate username", helper.EmptyObj{})
-		ctx.JSON(http.StatusConflict, response)
-	} else {
-		updatedAbsen := c.userService.UpdateAbsen(userUpdateDTO)
+	
+		updatedAbsen := c.absenService.UpdateAbsen(absenUpdateDTO)
 		response := helper.BuildResponse(true, "!OK", updatedAbsen)
 		ctx.JSON(http.StatusCreated, response)
-	}
+	
 }

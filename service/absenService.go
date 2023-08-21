@@ -4,15 +4,14 @@ import (
 	"log"
 
 	"github.com/mashingan/smapping"
-	"github.com/odhiahmad/apiabsen/dto"
-	"github.com/odhiahmad/apiabsen/entity"
-	"github.com/odhiahmad/apiabsen/repository"
+	"github.com/odhiahmad/absensi/dto"
+	"github.com/odhiahmad/absensi/entity"
+	"github.com/odhiahmad/absensi/repository"
 )
 
 type AbsenService interface {
 	CreateAbsen(absen dto.AbsenCreateDTO) entity.Absen
 	UpdateAbsen(absen dto.AbsenUpdateDTO) entity.Absen
-	IsDuplicateAbsenname(absen string) bool
 }
 
 type absenService struct {

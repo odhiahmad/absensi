@@ -3,7 +3,7 @@ package repository
 import (
 	"math"
 
-	"github.com/odhiahmad/apiuser/dto"
+	"github.com/odhiahmad/absensi/dto"
 	"gorm.io/gorm"
 )
 

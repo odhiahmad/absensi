@@ -4,9 +4,9 @@ import (
 	"net/http"
 
 	"github.com/gin-gonic/gin"
-	"github.com/odhiahmad/apiuser/dto"
-	"github.com/odhiahmad/apiuser/helper"
-	"github.com/odhiahmad/apiuser/service"
+	"github.com/odhiahmad/absensi/dto"
+	"github.com/odhiahmad/absensi/helper"
+	"github.com/odhiahmad/absensi/service"
 )
 
 type UserController interface {

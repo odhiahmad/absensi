@@ -1,4 +1,4 @@
-module github.com/odhiahmad/apiuser
+module github.com/odhiahmad/absensi
 
 go 1.16
 

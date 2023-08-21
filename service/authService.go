@@ -3,8 +3,8 @@ package service
 import (
 	"log"
 
-	"github.com/odhiahmad/apiuser/entity"
-	"github.com/odhiahmad/apiuser/repository"
+	"github.com/odhiahmad/absensi/entity"
+	"github.com/odhiahmad/absensi/repository"
 	"golang.org/x/crypto/bcrypt"
 )
 
