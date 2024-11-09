@@ -1,4 +1,4 @@
-module github.com/odhiahmad/absensi
+module github.com/odhiahmad/kasirku-service
 
 go 1.16
 

@@ -4,10 +4,10 @@ import (
 	"net/http"
 
 	"github.com/gin-gonic/gin"
-	"github.com/odhiahmad/absensi/dto"
-	"github.com/odhiahmad/absensi/entity"
-	"github.com/odhiahmad/absensi/helper"
-	"github.com/odhiahmad/absensi/service"
+	"github.com/odhiahmad/kasirku-service/dto"
+	"github.com/odhiahmad/kasirku-service/entity"
+	"github.com/odhiahmad/kasirku-service/helper"
+	"github.com/odhiahmad/kasirku-service/service"
 )
 
 type AuthController interface {

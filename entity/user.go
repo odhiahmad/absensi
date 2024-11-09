@@ -7,7 +7,7 @@ import (
 )
 
 type User struct {
-	ID          uuid.UUID  `gorm:"type:uuid;default:uuid_generate_v4()"`
+	ID        uuid.UUID `gorm:"type:uuid;default:uuid_generate_v4()"`
 	Nama      string    `gorm:"type:varchar(255)" json:"nama"`
 	Username  string    `gorm:"uniqueIndex;type:varchar(255)" json:"username"`
 	Password  string    `gorm:"->;<-;not null" json:"-"`

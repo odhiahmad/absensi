@@ -4,9 +4,9 @@ import (
 	"log"
 
 	"github.com/mashingan/smapping"
-	"github.com/odhiahmad/absensi/dto"
-	"github.com/odhiahmad/absensi/entity"
-	"github.com/odhiahmad/absensi/repository"
+	"github.com/odhiahmad/kasirku-service/dto"
+	"github.com/odhiahmad/kasirku-service/entity"
+	"github.com/odhiahmad/kasirku-service/repository"
 )
 
 type UserService interface {

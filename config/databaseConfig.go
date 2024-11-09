@@ -5,12 +5,12 @@ import (
 	"os"
 
 	"github.com/joho/godotenv"
-	"github.com/odhiahmad/absensi/entity"
+	"github.com/odhiahmad/kasirku-service/entity"
 	"gorm.io/driver/postgres"
 	"gorm.io/gorm"
 )
 
-//setup database
+// setup database
 func SetupDatabaseConnection() *gorm.DB {
 	err := godotenv.Load()
 
@@ -34,7 +34,7 @@ func SetupDatabaseConnection() *gorm.DB {
 	if err != nil {
 		panic("Gagal membuat koneksi ke database")
 	}
-	db.AutoMigrate(&entity.User{}, &entity.Absen{})
+	db.AutoMigrate(&entity.User{})
 	return db
 }
 

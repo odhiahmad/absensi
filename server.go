@@ -2,29 +2,24 @@ package main
 
 import (
 	"github.com/gin-gonic/gin"
-	"github.com/odhiahmad/absensi/config"
-	"github.com/odhiahmad/absensi/controller"
-	"github.com/odhiahmad/absensi/repository"
-	"github.com/odhiahmad/absensi/service"
+	"github.com/odhiahmad/kasirku-service/config"
+	"github.com/odhiahmad/kasirku-service/controller"
+	"github.com/odhiahmad/kasirku-service/middleware"
+	"github.com/odhiahmad/kasirku-service/repository"
+	"github.com/odhiahmad/kasirku-service/service"
 	"gorm.io/gorm"
 )
 
 var (
-	db              *gorm.DB                   = config.SetupDatabaseConnection()
-	userRepository  repository.UserRepository  = repository.NewUserRepository(db)
-	absenRepository  repository.AbsenRepository  = repository.NewAbsenRepository(db)
+	db             *gorm.DB                  = config.SetupDatabaseConnection()
+	userRepository repository.UserRepository = repository.NewUserRepository(db)
 
+	jwtService  service.JWTService  = service.NewJwtService()
+	authService service.AuthService = service.NewAuthService(userRepository)
+	userService service.UserService = service.NewUserService(userRepository)
 
-	jwtService   service.JWTService   = service.NewJwtService()
-	authService  service.AuthService  = service.NewAuthService(userRepository)
-	userService  service.UserService  = service.NewUserService(userRepository)
-	absenService  service.AbsenService  = service.NewAbsenService(absenRepository)
-
-
-	authController  controller.AuthController  = controller.NewAuthController(authService, jwtService)
-	userController  controller.UserController  = controller.NewUserController(userService, jwtService)
-	absenController  controller.AbsenController  = controller.NewAbsenController(absenService, jwtService)
-
+	authController controller.AuthController = controller.NewAuthController(authService, jwtService)
+	userController controller.UserController = controller.NewUserController(userService, jwtService)
 )
 
 func CORSMiddleware() gin.HandlerFunc {
@@ -55,18 +50,11 @@ func main() {
 	{
 		authRoutes.POST("/login", authController.Login)
 	}
-	// middleware.AuthorizeJWT(jwtService)
 
 	userRoutes := r.Group("api/user")
 	{
 		userRoutes.POST("/create", userController.CreateUser)
 		userRoutes.PUT("/update", userController.UpdateUser)
-	}
-
-	absenRoutes := r.Group("api/absen")
-	{
-		absenRoutes.POST("/create", userController.CreateUser)
-		absenRoutes.PUT("/update", userController.UpdateUser)
 	}
 
 	r.Run()
